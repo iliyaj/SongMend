@@ -1,0 +1,36 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Local development settings
+.env
+
+# Processed audio files
+*.mp3
+*.m4p
+*.wav
+output/
+
+# Ignore sensitive configuration if applicable
+config/config.json
+
+# Logs and temporary files
+*.log
+tmp/
