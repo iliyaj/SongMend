@@ -26,6 +26,7 @@ build/
 *.mp3
 *.m4p
 *.wav
+*.m4a
 output/
 
 # Ignore sensitive configuration if applicable
