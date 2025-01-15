@@ -19,11 +19,11 @@ def move_file(file_path, destination_folder):
         os.makedirs(destination_folder, exist_ok=True)
         destination_path = os.path.join(destination_folder, os.path.basename(file_path))
         shutil.move(file_path, destination_path)
-        logging.info(f"Moved file {file_path} to {destination_path}")
-        print(f"Moved file {file_path} to {destination_path}")
+        logging.info(f"✅ Moved file {file_path} to {destination_path}")
+        print(f"✅ Moved file {file_path} to {destination_path}")
     except Exception as e:
-        logging.error(f"Failed to move file {file_path} to {destination_folder}: {str(e)}")
-        print(f"Failed to move file {file_path} to {destination_folder}: {str(e)}")
+        logging.error(f"❌ Failed to move file {file_path} to {destination_folder}: {str(e)}")
+        print(f"❌ Failed to move file {file_path} to {destination_folder}: {str(e)}")
 
 def check_audio_file(file_path):
     # First, try to get file info with increased analyzeduration and probesize
@@ -47,14 +47,14 @@ def check_audio_file(file_path):
             for stream in file_info['streams']:
                 if stream['codec_type'] == 'audio':
                     if 'channels' in stream and stream['channels'] > 0:
-                        logging.info(f"File appears valid: {file_path}")
+                        logging.info(f"✅ File appears valid: {file_path}")
                         return True
         
-        logging.warning(f"File seems corrupt (no valid audio stream): {file_path}")
+        logging.warning(f"⚠️ File seems corrupt (no valid audio stream): {file_path}")
         return False
 
     except subprocess.CalledProcessError:
-        logging.error(f"FFprobe failed to analyze the file: {file_path}")
+        logging.error(f"❌ FFprobe failed to analyze the file: {file_path}")
         return False
 
     # If FFprobe doesn't give conclusive results, try playing a small portion of the file
@@ -69,11 +69,11 @@ def check_audio_file(file_path):
 
     try:
         subprocess.run(play_command, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-        logging.info(f"File played successfully: {file_path}")
+        logging.info(f"✅ File played successfully: {file_path}")
         return True
     except subprocess.CalledProcessError as e:
-        logging.error(f"File failed to play: {file_path}")
-        logging.error(f"Error: {e.stderr.decode('utf-8')}")
+        logging.error(f"❌ File failed to play: {file_path}")
+        logging.error(f"❌ Error: {e.stderr.decode('utf-8')}")
         return False
 
 def is_video_file(filename):
@@ -83,8 +83,8 @@ def is_video_file(filename):
 def detect_corruption(input_folder, error_folder, video_folder):
     for filename in os.listdir(input_folder):
         input_file_path = os.path.join(input_folder, filename)
-        logging.info(f"Checking file: {input_file_path}")
-        print(f"Checking file: {input_file_path}")
+        logging.info(f"ℹ️ Checking file: {input_file_path}")
+        print(f"ℹ️ Checking file: {input_file_path}")
 
         if is_video_file(filename):
             move_file(input_file_path, video_folder)
@@ -94,8 +94,8 @@ def detect_corruption(input_folder, error_folder, video_folder):
             if not check_audio_file(input_file_path):
                 move_file(input_file_path, error_folder)
             else:
-                logging.info(f"File passed all checks: {input_file_path}")
-                print(f"File passed all checks: {input_file_path}")
+                logging.info(f"✅ File passed all checks: {input_file_path}")
+                print(f"✅ File passed all checks: {input_file_path}")
 
 if __name__ == "__main__":
     # 2. Define paths for testing relative to the project root

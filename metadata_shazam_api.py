@@ -12,7 +12,7 @@ def convert_audio_to_shazam_format(input_file_path, start_time=20, duration=5):
     audio = AudioSegment.from_file(input_file_path)
     audio = audio.set_frame_rate(44100).set_channels(1).set_sample_width(2)
     start_ms = start_time * 1000
-    end_ms = start_ms + (duration * 5000)
+    end_ms = start_ms + (duration * 1000)
     audio_segment = audio[start_ms:end_ms]
     raw_data = io.BytesIO()
     audio_segment.export(raw_data, format="raw")

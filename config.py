@@ -37,12 +37,14 @@ def get_folders():
     config = load_config()
     # Dynamically build paths based on BASE_DIR
     return {
-        'audio_folder': config.get('audio_folder', os.path.join(BASE_DIR, 'input_files', 'audio_files')),
-        'success_folder': config.get('success_folder', os.path.join(BASE_DIR, 'output_files', 'song_detection', 'success')),
-        'failed_folder': config.get('failed_folder', os.path.join(BASE_DIR, 'output_files', 'song_detection', 'failed')),
-        'temp_folder': config.get('temp_folder', os.path.join(BASE_DIR, 'temp_files')),
-        'error_folder': config.get('error_folder', os.path.join(BASE_DIR, 'input_files', 'error_files')),
-        'video_folder': config.get('video_folder', os.path.join(BASE_DIR, 'input_files', 'video_files')),
-        'processed_folder': config.get('processed_folder', os.path.join(BASE_DIR, 'input_files', 'processed_files')),
-        'original_folder': config.get('original_files_folder', os.path.join(BASE_DIR, 'input_files', 'original_files'))
+        'audio_folder':     config.get('audio_folder',      os.path.join(BASE_DIR, 'input_files', 'audio_files')),
+        'error_folder':     config.get('error_folder',      os.path.join(BASE_DIR, 'input_files', 'error_files')),
+        'video_folder':     config.get('video_folder',      os.path.join(BASE_DIR, 'input_files', 'video_files')),
+        'processed_folder': config.get('processed_folder',  os.path.join(BASE_DIR, 'input_files', 'processed_files')),
+        'original_folder':  config.get('original_folder',   os.path.join(BASE_DIR, 'input_files', 'original_files')),
+        
+        'success_folder':   config.get('success_folder',    os.path.join(BASE_DIR, 'output_files', 'song_detection', 'success')),
+        'failed_folder':    config.get('failed_folder',     os.path.join(BASE_DIR, 'output_files', 'song_detection', 'failed')),
+        
+        'temp_folder':      config.get('temp_folder',       os.path.join(BASE_DIR, 'temp_files'))
     }
